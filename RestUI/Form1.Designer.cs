@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbFileName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbFileName = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -49,22 +49,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Adott fájl mentése a szerverről";
             // 
-            // tbFileName
-            // 
-            this.tbFileName.Location = new System.Drawing.Point(6, 46);
-            this.tbFileName.Name = "tbFileName";
-            this.tbFileName.Size = new System.Drawing.Size(156, 20);
-            this.tbFileName.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Fájlnév (pl.: kep.jpg)";
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(168, 46);
@@ -75,6 +59,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Fájlnév (pl.: kep.jpg)";
+            // 
+            // tbFileName
+            // 
+            this.tbFileName.Location = new System.Drawing.Point(6, 46);
+            this.tbFileName.Name = "tbFileName";
+            this.tbFileName.Size = new System.Drawing.Size(156, 20);
+            this.tbFileName.TabIndex = 0;
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(12, 105);
@@ -83,6 +83,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Összes fájl mentése a szerverről";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 

@@ -41,18 +41,24 @@ namespace RestUI
                 CommonVoids.ErrorMsg(respone.Message);
                 return;
             }
-            SaveFileDialog sfDialod = new SaveFileDialog();
-            sfDialod.FileName = respone.File.FirstOrDefault().FileName;
-            sfDialod.Title = "Fájl mentése";
-            sfDialod.ShowDialog();
 
-            if (string.IsNullOrWhiteSpace(sfDialod.FileName)) return;
+            FileControl fileControl = new FileControl(respone);
+            fileControl.SaveFiles();
+            tbFileName.Text = string.Empty;
+        }
 
-            using (FileStream fs = File.Create(sfDialod.FileName))
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            RestControl rest = new RestControl();
+            FileResponse respone = rest.GetData();
+            if (!string.IsNullOrWhiteSpace(respone.Message))
             {
-                byte[] data = new UTF8Encoding(true).GetBytes(respone.File.FirstOrDefault().FileData);
-                fs.Write(data, 0, data.Length);
-            }            
+                CommonVoids.ErrorMsg(respone.Message);
+                return;
+            }
+            FileControl fileControl = new FileControl(respone);
+            fileControl.SaveFiles();
+         
         }
     }
 }

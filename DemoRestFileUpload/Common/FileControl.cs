@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace DemoRestFileUpload.Common
 {
@@ -50,7 +51,7 @@ namespace DemoRestFileUpload.Common
                 }
                 else
                 {
-                    list.Add(GetFile(files.Where(p=> Path.GetFileName(p) == fileName).FirstOrDefault()));
+                    list.Add(GetFile(files.Where(p=> Path.GetFileName(p).ToLower() == fileName.ToLower()).FirstOrDefault()));
                     return list;
                 }
             }
@@ -61,16 +62,20 @@ namespace DemoRestFileUpload.Common
             return list;
         }
 
-        public string GetJson(string fileName = "")
+        public string GetXML(string fileName = "")
         {
             List<FileDescription> files = GetFiles(fileName);
             FileResponse response = new FileResponse();
             response.File = files;
             response.Message = errorMessage;
-
-            return JsonConvert.SerializeObject(response);
+            XmlSerializer serializer = new XmlSerializer(typeof(FileResponse));
+            using (StringWriter textWriter = new StringWriter())
+            {
+                serializer.Serialize(textWriter, response);
+                return textWriter.ToString();
+            }            
         }
-
+      
         public void Save(string json)
         {
             
@@ -94,7 +99,7 @@ namespace DemoRestFileUpload.Common
         private string DecodeBase64(string base64)
         {
             byte[] bytes = Convert.FromBase64String(base64);
-            return ASCIIEncoding.ASCII.GetString(bytes);
+            return Encoding.UTF8.GetString(bytes);
         }
 
 

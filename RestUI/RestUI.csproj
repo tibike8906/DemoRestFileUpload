@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Common\CommonVoids.cs" />
     <Compile Include="Common\Settings.cs" />
+    <Compile Include="FileControl.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

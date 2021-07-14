@@ -1,8 +1,11 @@
 ﻿using FileDataCommunication;
 using Newtonsoft.Json;
 using RestUI.Common;
+using System;
 using System.IO;
 using System.Net;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace RestUI
 {
@@ -25,16 +28,17 @@ namespace RestUI
             if (string.IsNullOrWhiteSpace(fileName))
                 request = WebRequest.Create(apiURL + "/dokumentumok");
             else
-                request = WebRequest.Create(apiURL + "/dokumentumok/"+ fileName);
+                request = WebRequest.Create(apiURL + "/dokumentumok/" + fileName);
 
             request.Proxy = proxy;
+            request.ContentType = "text/xml";
             Stream objStream;
-            objStream = request.GetResponse().GetResponseStream();
 
-            using (StreamReader reader = new StreamReader(objStream))            
-                data = reader.ReadToEnd();          
-            FileResponse response = JsonConvert.DeserializeObject<FileResponse>(data);
+            objStream = request.GetResponse().GetResponseStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(FileResponse));            
+            FileResponse response = (FileResponse)serializer.Deserialize(new StreamReader(objStream, Encoding.UTF8));
             return response;
+
         }
 
     }
