@@ -42,8 +42,8 @@ namespace RestUI
                 return;
             }
 
-            FileControl fileControl = new FileControl(respone);
-            fileControl.SaveFiles();
+            FileControl fileControl = new FileControl();
+            fileControl.SaveFiles(respone);
             tbFileName.Text = string.Empty;
         }
 
@@ -56,9 +56,22 @@ namespace RestUI
                 CommonVoids.ErrorMsg(respone.Message);
                 return;
             }
-            FileControl fileControl = new FileControl(respone);
-            fileControl.SaveFiles();
+            FileControl fileControl = new FileControl();
+            fileControl.SaveFiles(respone);
          
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            FileControl fileControl = new FileControl();
+
+            FileDescription fileDescription = fileControl.OpenFile();
+            if (fileDescription == null) return;
+            RestControl rest = new RestControl();
+            string response = rest.SendFile(fileDescription);
+            if(response != null)
+                MessageBox.Show(response, "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

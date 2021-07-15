@@ -76,29 +76,42 @@ namespace DemoRestFileUpload.Common
             }            
         }
       
-        public void Save(string json)
+        public bool Save(string value)
         {
-            
-            FileDescription fileDescription = JsonConvert.DeserializeObject<FileDescription>(json);
+            FileDescription fileDescription;
+            XmlSerializer serializer = new XmlSerializer(typeof(FileDescription));            
+            using (TextReader textReader = new StringReader(value))
+            {
+                fileDescription = (FileDescription)serializer.Deserialize(textReader);
+            }
 
             if (File.Exists(_path + fileDescription.FileName))
             {
                 errorMessage = "A megadott fájlnév már létezik a szerveren!";
-                return;
+                return false;
             }
-
-            File.WriteAllText(_path + fileDescription.FileName, DecodeBase64(fileDescription.FileData));
+            try
+            {
+                File.WriteAllText(_path + fileDescription.FileName, DecodeBase64(fileDescription.FileData));
+            }
+            catch (Exception)
+            {
+                errorMessage = "A megadott fájlt nem sikerült menteni a szerveren!";
+                return false;
+            }
+            errorMessage = "Sikeres mentés!";
+            return true;            
         }
 
-        private string EncodeToBase64(string json)
+        public string EncodeToBase64(string value)
         {
-            Byte[] bytes = Encoding.UTF8.GetBytes(json);
+            Byte[] bytes = Encoding.UTF8.GetBytes(value);
             return Convert.ToBase64String(bytes);
         }
 
         private string DecodeBase64(string base64)
         {
-            byte[] bytes = Convert.FromBase64String(base64);
+            Byte[] bytes = Convert.FromBase64String(base64);
             return Encoding.UTF8.GetString(bytes);
         }
 

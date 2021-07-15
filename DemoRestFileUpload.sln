@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDataCommunication", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestUI", "RestUI\RestUI.csproj", "{7F26EE52-2D87-4338-8094-C0E9ED5A96B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRestFileUpload.UnitTests", "DemoRestFileUpload.UnitTests\DemoRestFileUpload.UnitTests.csproj", "{D3FF1C13-199E-4DD4-82B3-BFF73B4DE9A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7F26EE52-2D87-4338-8094-C0E9ED5A96B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F26EE52-2D87-4338-8094-C0E9ED5A96B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F26EE52-2D87-4338-8094-C0E9ED5A96B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FF1C13-199E-4DD4-82B3-BFF73B4DE9A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FF1C13-199E-4DD4-82B3-BFF73B4DE9A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FF1C13-199E-4DD4-82B3-BFF73B4DE9A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FF1C13-199E-4DD4-82B3-BFF73B4DE9A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

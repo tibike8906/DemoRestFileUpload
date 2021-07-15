@@ -11,13 +11,22 @@ namespace RestUI
 {
     public class FileControl
     {
-        FileResponse _response;
-        public FileControl(FileResponse response)
-        {
-            _response = response;
-        }
 
-        public void SaveFiles()
+        public FileDescription OpenFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Válasszon file-t!";
+            ofd.ShowDialog();
+            string fileName = ofd.FileName;
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+
+            FileDescription fileDescription = new FileDescription();
+            fileDescription.FileName = Path.GetFileName(fileName);
+            fileDescription.FileData = EncodeToBase64(File.ReadAllText(fileName));
+
+            return fileDescription;
+        }
+        public void SaveFiles(FileResponse response)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.Description = "Mappa választás";
@@ -27,7 +36,7 @@ namespace RestUI
 
             if (string.IsNullOrWhiteSpace(path)) return;
 
-            foreach (var file in _response.File)
+            foreach (var file in response.File)
             {
                 using (FileStream fs = File.Create(path + "\\" +  file.FileName))
                 {
@@ -46,7 +55,7 @@ namespace RestUI
 
         private string DecodeBase64(string base64)
         {
-            byte[] bytes = Convert.FromBase64String(base64);
+            Byte[] bytes = Convert.FromBase64String(base64);
             return Encoding.UTF8.GetString(bytes);
         }
     }
